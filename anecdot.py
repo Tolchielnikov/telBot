@@ -18,4 +18,4 @@ def parse_html_anecdot(html):
     return table
 
 
-print(parse_html_anecdot(get_html_anecdot(urlAnecdot)))
+#print(parse_html_anecdot(get_html_anecdot(urlAnecdot)))

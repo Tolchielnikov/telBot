@@ -2,6 +2,7 @@ import telebot
 import requests
 import horoscope
 import anecdot
+import say
 from telebot.types import Message
 
 TOKEN = '700439547:AAF-WXbcpVnss30bKDRaBBQEi5q_FZcesQk'
@@ -23,7 +24,7 @@ bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start'])
 def start_message(message):
-    bot.send_message(message.chat.id, 'Привет, я реогирую только на "привет" и "пока"')
+    bot.send_message(message.chat.id, 'Привет, я реогирую только на "привет"  "пока" "пошути"  и знак зодиака ')
 
 
 @bot.message_handler(commands=['help'])
@@ -46,11 +47,23 @@ def send_text(message):
 
     elif message.text.lower() == 'расскажи анекдот' or message.text.lower() == 'мне скучно' or message.text.lower() == 'пошути':
         smeshno = anecdot.parse_html_anecdot(anecdot.get_html_anecdot(anecdot.urlAnecdot))
-        print(smeshno)
+       # print(smeshno)
+
         bot.send_message(message.chat.id, smeshno)
+
+
+    elif message.text.lower().partition(' ')[0] == 'воспроизведи:':
+        print('воспроизвожу')
+        chat_id = message.chat.id
+        say.sayV(message.text.lower().partition(' ')[2])
+        bot.send_voice(chat_id=chat_id, voice=open(r'C:\Users\tolchelnikov\telBot\1.ogg', 'rb'))
+
 
     else:
         bot.send_message(message.chat.id, 'Извини, я пока не понимаю о чем ты')
-
+        print('************* В МУСОРКУ *********************')
+        print(message.text.lower())
+        print(message.text.lower().partition(' ')[0])
+        print(message.text.lower().partition(' ')[2])
 
 bot.polling(timeout=60)
