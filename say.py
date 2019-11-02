@@ -1,9 +1,8 @@
 from gtts import gTTS
-from pygame import mixer
+
 
 
 def sayV(message):
-
     f = open("text.txt", "w")
     f.write(message)
     f.close()

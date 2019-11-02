@@ -47,8 +47,6 @@ def send_text(message):
 
     elif message.text.lower() == 'расскажи анекдот' or message.text.lower() == 'мне скучно' or message.text.lower() == 'пошути':
         smeshno = anecdot.parse_html_anecdot(anecdot.get_html_anecdot(anecdot.urlAnecdot))
-       # print(smeshno)
-
         bot.send_message(message.chat.id, smeshno)
 
 
@@ -61,9 +59,6 @@ def send_text(message):
 
     else:
         bot.send_message(message.chat.id, 'Извини, я пока не понимаю о чем ты')
-        print('************* В МУСОРКУ *********************')
-        print(message.text.lower())
-        print(message.text.lower().partition(' ')[0])
-        print(message.text.lower().partition(' ')[2])
+
 
 bot.polling(timeout=60)
