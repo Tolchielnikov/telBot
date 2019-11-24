@@ -3,6 +3,7 @@ import requests
 import horoscope
 import anecdot
 import say
+import huiSlog
 from telebot.types import Message
 
 TOKEN = '700439547:AAF-WXbcpVnss30bKDRaBBQEi5q_FZcesQk'
@@ -10,6 +11,7 @@ urlTokenBot = f"https://api.telegram.org/bot{TOKEN}"
 sendMessage = 'sendMessage'
 getMe = 'getMe'
 getUpdates = 'getUpdates'
+notUnderstend = ' !!! я не знаю такой команды !!!'
 
 r = requests.get(f'{urlTokenBot}/{getUpdates}')
 
@@ -58,7 +60,7 @@ def send_text(message):
 
 
     else:
-        bot.send_message(message.chat.id, 'Извини, я пока не понимаю о чем ты')
+        bot.send_message(message.chat.id, huiSlog.huislog(message.text.lower()) + notUnderstend)
 
 
 bot.polling(timeout=60)
